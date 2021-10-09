@@ -3,7 +3,6 @@ package DatabaseConnector
 import (
 	"BackendAPI-Instagram/Structures"
 	"context"
-	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -11,40 +10,31 @@ import (
 	"log"
 )
 
-func GetUserByID(client *mongo.Client, ctx context.Context, id primitive.ObjectID) []Structures.User {
+func FetchPosts(client *mongo.Client, ctx context.Context, id string) []Structures.Post {
 
 	err := client.Ping(ctx, readpref.Primary())
-
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	objId, _ := primitive.ObjectIDFromHex(id)
 	queryDatabase := client.Database("Users")
-	queryCollection := queryDatabase.Collection("UsersTest")
+	queryCollection := queryDatabase.Collection("Posts")
 
-	cursor, err := queryCollection.Find(ctx, bson.M{"_id": id})
-
+	cursor, err := queryCollection.Find(ctx, bson.M{"_id": objId})
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	defer cursor.Close(ctx)
-
-	var users []Structures.User
+	var posts []Structures.Post
 
 	for cursor.Next(ctx) {
-		var user Structures.User
-		if cursor.Decode(&user); err != nil {
+		var post = Structures.Post{}
+		if cursor.Decode(&post); err != nil {
 			log.Fatal(err)
 		}
-		users = append(users, user)
+		posts = append(posts, post)
 	}
 
-	if err = cursor.Err(); err != nil {
-		log.Fatal(err)
-	}
+	return posts
 
-	fmt.Println(users)
-
-	return users
 }

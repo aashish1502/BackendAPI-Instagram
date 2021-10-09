@@ -15,6 +15,9 @@ func main() {
 
 	http.HandleFunc("/users", Handlers.ServeHTTP)
 	http.HandleFunc("/users/", Handlers.ServeHTTP)
+	http.HandleFunc("/posts/", Handlers.ServeHTTP)
+	http.HandleFunc("/posts", Handlers.ServeHTTP)
+	http.HandleFunc("/posts/users/", Handlers.ServeHTTP)
 	http.ListenAndServe("localhost:8080", nil)
 
 }

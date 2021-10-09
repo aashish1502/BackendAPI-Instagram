@@ -4,7 +4,6 @@ import (
 	"BackendAPI-Instagram/DatabaseConnector"
 	"BackendAPI-Instagram/Structures"
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -16,7 +15,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		internalServerError(w, r)
 	}
 
-	fmt.Println(u)
+	//fmt.Println(u)
 	DatabaseConnector.InsertUser(u)
 
 }
