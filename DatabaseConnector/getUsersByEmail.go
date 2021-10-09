@@ -2,7 +2,6 @@ package DatabaseConnector
 
 import (
 	"BackendAPI-Instagram/Structures"
-	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"log"
@@ -43,7 +42,7 @@ func GetUsersByEmail(mail string) []Structures.User {
 		log.Fatal(err)
 	}
 
-	fmt.Println(users)
+	//fmt.Println(users)
 
 	return users
 

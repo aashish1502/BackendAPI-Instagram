@@ -3,7 +3,6 @@ package DatabaseConnector
 import (
 	"BackendAPI-Instagram/Structures"
 	"context"
-	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -44,7 +43,7 @@ func GetUserByID(client *mongo.Client, ctx context.Context, id primitive.ObjectI
 		log.Fatal(err)
 	}
 
-	fmt.Println(users)
+	//fmt.Println(users)
 
 	return users
 }

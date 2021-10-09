@@ -15,7 +15,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		internalServerError(w, r)
 	}
 
-	//fmt.Println(u)
 	DatabaseConnector.InsertUser(u)
 
 }

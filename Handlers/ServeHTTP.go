@@ -1,7 +1,6 @@
 package Handlers
 
 import (
-	"fmt"
 	"net/http"
 	"regexp"
 	"sync"
@@ -21,7 +20,7 @@ var lock sync.Mutex
 func ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("content-type", "application/json")
-	fmt.Println(r.URL.Path)
+	//fmt.Println(r.URL.Path)
 
 	lock.Lock()
 	defer lock.Unlock()

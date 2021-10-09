@@ -11,12 +11,11 @@ import (
 func CreatePost(w http.ResponseWriter, r *http.Request) {
 
 	var p Structures.Post
-	err := json.NewDecoder(r.Body).Decode(&p)
+	err := json.NewDecoder(r.Body).Decode(p)
 	fmt.Println(p)
 	if err != nil {
 		internalServerError(w, r)
 		return
 	}
 	DatabaseConnector.InsertPost(p)
-
 }
